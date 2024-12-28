@@ -1,8 +1,5 @@
 use crate::Transform;
-use rhai::{
-    serde::{from_dynamic, to_dynamic},
-    Dynamic, Engine, Scope, AST,
-};
+use rhai::{serde::to_dynamic, Dynamic, Engine, Scope, AST};
 use serde_json::Value;
 use std::fs;
 
