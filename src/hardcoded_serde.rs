@@ -15,9 +15,13 @@ impl Transform for Transformer {
     fn transform(&self, transformation: &str, value: &Value) -> Value {
         match transformation {
             "drop" => serde_json::from_str("[]"), //Value::Array(vec![])
-            "identity" => serde_json::from_str(&format!("[{}]", serde_json::to_string(value).expect("Failed to serialize value"))),
+            "identity" => serde_json::from_str(&format!(
+                "[{}]",
+                serde_json::to_string(value).expect("Failed to serialize value")
+            )),
             "skip" => serde_json::from_str("null"), //Value::Null,
             _ => panic!("Unknown transform: {}", transformation),
-        }.expect("Failed to deserialize value")
+        }
+        .expect("Failed to deserialize value")
     }
 }
