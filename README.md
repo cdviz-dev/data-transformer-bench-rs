@@ -20,7 +20,7 @@ The data transformation could be integrated into cdviz-collector, for cdviz-coll
 
 Scenarii to bench (for comparison or feature/how-to):
 
-- [x] identity transformation (no change)
+- [x] identity transformation (no change, just wrap the value in an array)
 - [x] `null` return
 - [x] `[]` return
 - [ ] conditional transformation (if, switch, ...)
@@ -34,7 +34,7 @@ Look at the `transformations` folder for the various templates/scripts to transf
 - [x] template: [handlebars](https://crates.io/crates/handlebars) + [handlebars_misc_helpers](https://crates.io/crates/handlebars_misc_helpers)
 - [x] template: [tera](https://crates.io/crates/tera)
 - [x] transform: [vrl](https://crates.io/crates/vrl) (vector remap language)
-- [ ] script: [mlua](https://crates.io/crates/mlua)
+- [x] script: [mlua](https://crates.io/crates/mlua) (a lua binding for rust)
 - [x] script: [rhai](https://crates.io/crates/rhai)
 - [ ] script: [rquickjs](https://crates.io/crates/rquickjs)
 - [ ] script: [rune](https://crates.io/crates/rune)
