@@ -35,7 +35,7 @@ Look at the `transformations` folder for the various templates/scripts to transf
 - [x] template: [tera](https://crates.io/crates/tera)
 - [x] transform: [vrl](https://crates.io/crates/vrl) (vector remap language)
 - [ ] script: [mlua](https://crates.io/crates/mlua)
-- [ ] script: [rhai](https://crates.io/crates/rhai)
+- [x] script: [rhai](https://crates.io/crates/rhai)
 - [ ] script: [rquickjs](https://crates.io/crates/rquickjs)
 - [ ] script: [rune](https://crates.io/crates/rune)
 - [ ] script: [wasmi](https://crates.io/crates/wasmi)

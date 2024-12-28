@@ -1,5 +1,6 @@
 pub mod handlebars;
 pub mod hardcoded_serde;
+pub mod rhai;
 pub mod tera;
 pub mod vrl;
 
@@ -34,6 +35,7 @@ mod tests {
         let approach2 = handlebars::Transformer::new();
         let approach3 = tera::Transformer::new();
         let approach4 = vrl::Transformer::new();
+        let approach5 = rhai::Transformer::new();
         for transform in TRANSFORMS {
             let expected = approach1.transform(transform, &test_value);
             assert_eq!(
@@ -52,6 +54,12 @@ mod tests {
                 expected,
                 approach4.transform(transform, &test_value),
                 "{}_vrl",
+                transform
+            );
+            assert_eq!(
+                expected,
+                approach5.transform(transform, &test_value),
+                "{}_rhai",
                 transform
             );
         }
