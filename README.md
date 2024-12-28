@@ -19,21 +19,21 @@ The data transformation could be integrated into cdviz-collector, for cdviz-coll
 
 Scenarii to bench (for comparison or feature/how-to):
 
-- identity transformation (no change)
-- `null` return
-- `[]` return
-- conditional transformation (if, switch, ...)
-- restructure & transform the data (TBD)
+- [x] identity transformation (no change)
+- [x] `null` return
+- [x] `[]` return
+- [ ] conditional transformation (if, switch, ...)
+- [ ] restructure & transform the data (TBD)
   - timestamp insertion + parsing + formatting
 
 Look at the `transformations` folder for the various templates/scripts to transform the data.
 
 ## Tech to explore
 
-- [ ] template: [handlebars](https://crates.io/crates/handlebars) + [handlebars_misc_helpers](https://crates.io/crates/handlebars_misc_helpers)
-- [ ] template: [tera](https://crates.io/crates/tera)
+- [x] template: [handlebars](https://crates.io/crates/handlebars) + [handlebars_misc_helpers](https://crates.io/crates/handlebars_misc_helpers)
+- [x] template: [tera](https://crates.io/crates/tera)
 - [ ] template: [sailfish](https://rust-sailfish.github.io/sailfish/)
-- [ ] transform: [vrl](https://crates.io/crates/vrl) (vector remapping language)
+- [ ] transform: [vrl](https://crates.io/crates/vrl) (vector remap language)
 - [ ] script: [mlua](https://crates.io/crates/mlua)
 - [ ] script: [rhai](https://crates.io/crates/rhai)
 - [ ] script: [rquickjs](https://crates.io/crates/rquickjs)

@@ -1,5 +1,6 @@
 pub mod handlebars;
 pub mod hardcoded_serde;
+pub mod tera;
 
 use serde_json::Value;
 
