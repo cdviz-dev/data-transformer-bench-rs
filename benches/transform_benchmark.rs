@@ -1,5 +1,5 @@
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
-use data_transformer_bench::{CloneTransformer, HandlebarsTransformer};
+use data_transformer_bench::{Transform, hardcoded_serde, handlebars};
 use serde_json::json;
 
 fn transform_benchmark(c: &mut Criterion) {
@@ -11,13 +11,12 @@ fn transform_benchmark(c: &mut Criterion) {
         }
     });
 
-    let approach1 = CloneTransformer::new();
-    c.bench_function("clone", |b| {
-        b.iter(|| approach1.transform(black_box("clone"), black_box(&test_value)))
-    });
-
-    let approach2 = HandlebarsTransformer::new();
+    let approach1 = hardcoded_serde::Transformer::new();
+    let approach2 = handlebars::Transformer::new();
     for transform in data_transformer_bench::TRANSFORMS {
+        c.bench_function(&format!("{}_hardcoded_serde", transform), |b| {
+            b.iter(|| approach1.transform(black_box(transform), black_box(&test_value)))
+        });
         c.bench_function(&format!("{}_handlebars", transform), |b| {
             b.iter(|| approach2.transform(black_box(transform), black_box(&test_value)))
         });
