@@ -1,6 +1,7 @@
 pub mod handlebars;
 pub mod hardcoded_serde;
 pub mod tera;
+pub mod vrl;
 
 use serde_json::Value;
 
@@ -45,6 +46,12 @@ mod tests {
                 expected,
                 approach3.transform(transform, &test_value),
                 "{}_tera",
+                transform
+            );
+            assert_eq!(
+                expected,
+                approach4.transform(transform, &test_value),
+                "{}_vrl",
                 transform
             );
         }
