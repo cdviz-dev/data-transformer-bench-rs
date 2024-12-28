@@ -33,7 +33,7 @@ Look at the `transformations` folder for the various templates/scripts to transf
 - [x] template: [handlebars](https://crates.io/crates/handlebars) + [handlebars_misc_helpers](https://crates.io/crates/handlebars_misc_helpers)
 - [x] template: [tera](https://crates.io/crates/tera)
 - [ ] template: [sailfish](https://rust-sailfish.github.io/sailfish/)
-- [ ] transform: [vrl](https://crates.io/crates/vrl) (vector remap language)
+- [x] transform: [vrl](https://crates.io/crates/vrl) (vector remap language)
 - [ ] script: [mlua](https://crates.io/crates/mlua)
 - [ ] script: [rhai](https://crates.io/crates/rhai)
 - [ ] script: [rquickjs](https://crates.io/crates/rquickjs)
