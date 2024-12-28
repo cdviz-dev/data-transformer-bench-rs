@@ -16,6 +16,7 @@ The data transformation could be integrated into cdviz-collector, for cdviz-coll
   - `[]` empty array, will interpreted as drop of the event
   - `null` will be interpreted as a skip the transformation
   - an array of size 1 is a 1 to 1 transformation
+- the template/script are provided at runtime (by users to customize transformations)
 
 Scenarii to bench (for comparison or feature/how-to):
 
@@ -32,7 +33,6 @@ Look at the `transformations` folder for the various templates/scripts to transf
 
 - [x] template: [handlebars](https://crates.io/crates/handlebars) + [handlebars_misc_helpers](https://crates.io/crates/handlebars_misc_helpers)
 - [x] template: [tera](https://crates.io/crates/tera)
-- [ ] template: [sailfish](https://rust-sailfish.github.io/sailfish/)
 - [x] transform: [vrl](https://crates.io/crates/vrl) (vector remap language)
 - [ ] script: [mlua](https://crates.io/crates/mlua)
 - [ ] script: [rhai](https://crates.io/crates/rhai)
@@ -40,6 +40,11 @@ Look at the `transformations` folder for the various templates/scripts to transf
 - [ ] script: [rune](https://crates.io/crates/rune)
 - [ ] script: [wasmi](https://crates.io/crates/wasmi)
 - [ ] script: [wasmtime](https://crates.io/crates/wasmtime)
+
+### Rejected candidates
+
+- template: [sailfish](https://rust-sailfish.github.io/sailfish/), template are statically build at compile time
+
 
 ## Contributing
 
