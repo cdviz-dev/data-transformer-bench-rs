@@ -56,4 +56,12 @@ impl Transform for Transformer {
 
         result.try_into().expect("Failed to convert from VRL value")
     }
+
+    fn name(&self) -> &str {
+        "vrl"
+    }
+
+    fn accept(&self, transformation: &str) -> bool {
+        self.programs.contains_key(transformation)
+    }
 }

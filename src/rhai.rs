@@ -46,4 +46,12 @@ impl Transform for Transformer {
         serde_json::to_value(result).expect("Failed to convert Rhai result to JSON")
         // from_dynamic(result).expect("Failed to convert Rhai result to JSON")
     }
+
+    fn name(&self) -> &str {
+        "rhai"
+    }
+
+    fn accept(&self, transformation: &str) -> bool {
+        self.scripts.contains_key(transformation)
+    }
 }
