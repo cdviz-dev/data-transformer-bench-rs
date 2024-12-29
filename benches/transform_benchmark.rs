@@ -1,5 +1,5 @@
 use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion};
-use data_transformer_bench::{handlebars, hardcoded_serde, lua, rhai, tera, vrl, Transform};
+use data_transformer_bench::{handlebars, hardcoded_serde, lua, rhai, rune, tera, vrl, Transform};
 use serde_json::json;
 
 fn transform_benchmark(c: &mut Criterion) {
@@ -18,6 +18,7 @@ fn transform_benchmark(c: &mut Criterion) {
         Box::new(vrl::Transformer::new()),
         Box::new(rhai::Transformer::new()),
         Box::new(lua::Transformer::new()),
+        Box::new(rune::Transformer::new()),
     ];
     let mut group = c.benchmark_group("transform");
     for transform in data_transformer_bench::TRANSFORMS {
