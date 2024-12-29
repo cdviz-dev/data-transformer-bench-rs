@@ -2,6 +2,7 @@ pub mod handlebars;
 pub mod hardcoded_serde;
 pub mod lua;
 pub mod rhai;
+pub mod rune;
 pub mod tera;
 pub mod vrl;
 
@@ -41,6 +42,7 @@ mod tests {
             Box::new(vrl::Transformer::new()),
             Box::new(rhai::Transformer::new()),
             Box::new(lua::Transformer::new()),
+            Box::new(rune::Transformer::new()),
         ];
         for transform in TRANSFORMS {
             let expected = approach1.transform(transform, &test_value);

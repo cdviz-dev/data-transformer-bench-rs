@@ -38,7 +38,7 @@ Look at the `transformations` folder for the various templates/scripts to transf
 - [x] script: [mlua](https://crates.io/crates/mlua) (a lua binding for rust)
 - [x] script: [rhai](https://crates.io/crates/rhai)
 - [ ] script: [rquickjs](https://crates.io/crates/rquickjs)
-- [ ] script: [rune](https://crates.io/crates/rune)
+- [x] script: [rune](https://crates.io/crates/rune)
 - [ ] script: [wasmi](https://crates.io/crates/wasmi)
 - [ ] script: [wasmtime](https://crates.io/crates/wasmtime)
 

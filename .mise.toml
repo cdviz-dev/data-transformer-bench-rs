@@ -5,6 +5,12 @@ rust = "1.83"
 [tasks.test]
 run = "cargo test"
 
+[tasks.lint]
+run = "cargo fmt --all -- --check"
+
+[tasks.fmt]
+run = "cargo fmt --all"
+
 [tasks.bench]
 run = [
   "cargo bench",
@@ -14,4 +20,4 @@ run = [
 ]
 
 [tasks.ci]
-depends = ["test"]
+depends = ["test", "lint"]
