@@ -69,14 +69,6 @@ drop/rhai               time:   [801.65 ns 802.92 ns 804.24 ns]
 drop/lua                time:   [4.9586 µs 4.9696 µs 4.9797 µs]
 drop/rune               time:   [1.0599 µs 1.0615 µs 1.0632 µs]
 
-identity/hardcoded_...  time:   [799.32 ns 801.82 ns 804.70 ns]
-identity/handlebars     time:   [2.2369 µs 2.2393 µs 2.2421 µs]
-identity/tera           time:   [1.8578 µs 1.8601 µs 1.8625 µs]
-identity/vrl            time:   [1.3419 µs 1.3454 µs 1.3502 µs]
-identity/rhai           time:   [1.5856 µs 1.5869 µs 1.5882 µs]
-identity/lua            time:   [9.2040 µs 9.2127 µs 9.2218 µs]
-identity/rune           time:   [1.4768 µs 1.4785 µs 1.4803 µs]
-
 skip/hardcoded_serde    time:   [42.127 ns 42.166 ns 42.218 ns]
 skip/handlebars         time:   [592.99 ns 594.01 ns 595.20 ns]
 skip/tera               time:   [842.46 ns 845.00 ns 848.77 ns]
@@ -84,6 +76,14 @@ skip/vrl                time:   [566.10 ns 566.55 ns 567.04 ns]
 skip/rhai               time:   [768.12 ns 770.54 ns 773.88 ns]
 skip/lua                time:   [5.1970 µs 5.2107 µs 5.2276 µs]
 skip/rune               time:   [1.0025 µs 1.0034 µs 1.0042 µs]
+
+identity/hardcoded_...  time:   [799.32 ns 801.82 ns 804.70 ns]
+identity/handlebars     time:   [2.2369 µs 2.2393 µs 2.2421 µs]
+identity/tera           time:   [1.8578 µs 1.8601 µs 1.8625 µs]
+identity/vrl            time:   [1.3419 µs 1.3454 µs 1.3502 µs]
+identity/rhai           time:   [1.5856 µs 1.5869 µs 1.5882 µs]
+identity/lua            time:   [9.2040 µs 9.2127 µs 9.2218 µs]
+identity/rune           time:   [1.4768 µs 1.4785 µs 1.4803 µs]
 ```
 
 ## Contributing
