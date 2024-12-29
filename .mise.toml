@@ -1,0 +1,17 @@
+[tools]
+rust = "1.83"
+# gnuplot = "latest"
+
+[tasks.test]
+run = "cargo test"
+
+[tasks.bench]
+run = [
+  "cargo bench",
+  "cp target/criterion/transform/drop/report/violin.svg docs/images/violin_drop.svg",
+  "cp target/criterion/transform/identity/report/violin.svg docs/images/violin_identity.svg",
+  "cp target/criterion/transform/skip/report/violin.svg docs/images/violin_skip.svg",
+]
+
+[tasks.ci]
+depends = ["test"]

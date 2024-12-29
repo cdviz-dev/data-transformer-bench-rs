@@ -69,4 +69,12 @@ impl Transform for Transformer {
             }
         }
     }
+
+    fn name(&self) -> &str {
+        "lua"
+    }
+
+    fn accept(&self, transformation: &str) -> bool {
+        self.scripts.contains_key(transformation)
+    }
 }

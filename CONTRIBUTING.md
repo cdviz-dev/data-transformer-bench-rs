@@ -2,12 +2,24 @@ Contributions are welcome! Please open an issue or PR to discuss the ideas.
 
 ## Build and run
 
+### Simple
+
 ```bash
 # Run the test (before benchmarking)
 cargo test
 
 # Run the benchmark
 cargo bench
+```
+
+### Advanced
+
+use [mise](https://mise.jdx.dev/) for setup and run tasks
+
+```bash
+mise install
+mise tasks
+mise run bench
 ```
 
 ## Adding a new approach

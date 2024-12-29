@@ -34,4 +34,12 @@ impl Transform for Transformer {
             .expect("Failed to render template");
         serde_json::from_str(&rendered).expect("Failed to parse rendered JSON")
     }
+
+    fn name(&self) -> &str {
+        "handlebars"
+    }
+
+    fn accept(&self, transformation: &str) -> bool {
+        self.handlebars.get_template(transformation).is_some()
+    }
 }

@@ -32,4 +32,12 @@ impl Transform for Transformer {
             .expect("Failed to render template");
         serde_json::from_str(&rendered).expect("Failed to parse rendered JSON")
     }
+
+    fn name(&self) -> &str {
+        "tera"
+    }
+
+    fn accept(&self, transformation: &str) -> bool {
+        self.tera.get_template(transformation).is_ok()
+    }
 }

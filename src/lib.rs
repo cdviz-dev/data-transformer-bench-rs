@@ -13,6 +13,8 @@ pub const SKIP: &str = "skip";
 pub const TRANSFORMS: [&str; 3] = [DROP, IDENTITY, SKIP];
 
 pub trait Transform {
+    fn name(&self) -> &str;
+    fn accept(&self, transformation: &str) -> bool;
     fn transform(&self, transformation: &str, value: &Value) -> Value;
 }
 
@@ -33,43 +35,27 @@ mod tests {
         });
 
         let approach1 = hardcoded_serde::Transformer::new();
-        let approach2 = handlebars::Transformer::new();
-        let approach3 = tera::Transformer::new();
-        let approach4 = vrl::Transformer::new();
-        let approach5 = rhai::Transformer::new();
-        let approach6 = lua::Transformer::new();
+        let approaches: Vec<Box<dyn Transform>> = vec![
+            Box::new(handlebars::Transformer::new()),
+            Box::new(tera::Transformer::new()),
+            Box::new(vrl::Transformer::new()),
+            Box::new(rhai::Transformer::new()),
+            Box::new(lua::Transformer::new()),
+        ];
         for transform in TRANSFORMS {
             let expected = approach1.transform(transform, &test_value);
-            assert_eq!(
-                expected,
-                approach2.transform(transform, &test_value),
-                "{}_handlebars",
-                transform
-            );
-            assert_eq!(
-                expected,
-                approach3.transform(transform, &test_value),
-                "{}_tera",
-                transform
-            );
-            assert_eq!(
-                expected,
-                approach4.transform(transform, &test_value),
-                "{}_vrl",
-                transform
-            );
-            assert_eq!(
-                expected,
-                approach5.transform(transform, &test_value),
-                "{}_rhai",
-                transform
-            );
-            assert_eq!(
-                expected,
-                approach6.transform(transform, &test_value),
-                "{}_lua",
-                transform
-            );
+            for approach in approaches.iter() {
+                if !approach.accept(transform) {
+                    continue;
+                }
+                assert_eq!(
+                    expected,
+                    approach.transform(transform, &test_value),
+                    "{}/{}",
+                    approach.name(),
+                    transform,
+                );
+            }
         }
     }
 }

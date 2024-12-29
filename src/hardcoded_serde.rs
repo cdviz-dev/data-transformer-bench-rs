@@ -24,4 +24,12 @@ impl Transform for Transformer {
         }
         .expect("Failed to deserialize value")
     }
+
+    fn name(&self) -> &str {
+        "hardcoded_serde"
+    }
+
+    fn accept(&self, transformation: &str) -> bool {
+        transformation == "drop" || transformation == "identity" || transformation == "skip"
+    }
 }
