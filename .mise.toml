@@ -3,6 +3,7 @@ rust = "1.83"
 # gnuplot = "latest"
 "aqua:cargo-bins/cargo-binstall" = "1" # do not use cargo-binstall (it's a special name used by mise)
 "cargo:cargo-sort" = "latest"
+"cargo:cargo-criterion" = "latest"
 
 [tasks."install:rustcomponents"]
 hide = true
@@ -33,10 +34,12 @@ run = ["cargo fmt", "cargo sort --grouped"]
 
 [tasks.bench]
 run = [
-  "cargo bench",
-  "cp target/criterion/transform/drop/report/violin.svg docs/images/violin_drop.svg",
-  "cp target/criterion/transform/identity/report/violin.svg docs/images/violin_identity.svg",
-  "cp target/criterion/transform/skip/report/violin.svg docs/images/violin_skip.svg",
+  # "cargo bench",
+  "rm -rf ./target/criterion", # no comparison between different run
+  "cargo criterion --plotting-backend plotters --output-format quiet",
+  "cp target/criterion/reports/drop/violin.svg docs/images/violin_drop.svg",
+  "cp target/criterion/reports/identity/violin.svg docs/images/violin_identity.svg",
+  "cp target/criterion/reports/skip/violin.svg docs/images/violin_skip.svg",
 ]
 
 [tasks.ci]
