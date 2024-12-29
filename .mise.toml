@@ -1,15 +1,35 @@
 [tools]
 rust = "1.83"
 # gnuplot = "latest"
+"aqua:cargo-bins/cargo-binstall" = "1" # do not use cargo-binstall (it's a special name used by mise)
+"cargo:cargo-sort" = "latest"
+
+[tasks."install:rustcomponents"]
+hide = true
+run = [
+    "rustup component add rustfmt clippy", # not installed by rust-toolchain.toml ??
+]
 
 [tasks.test]
 run = "cargo test"
 
-[tasks.lint]
-run = "cargo fmt --all -- --check"
+[tasks."lint"]
+depends = ["lint:rust"]
+description = "Lint all the code"
 
-[tasks.fmt]
-run = "cargo fmt --all"
+[tasks."lint:rust"]
+depends = ["install:rustcomponents"]
+run = [
+    "cargo fmt --all -- --check",
+    "cargo sort --grouped --check",
+    "cargo clippy --workspace --all-features --all-targets",
+]
+
+[tasks."format"]
+alias = ["fmt"]
+depends = ["install:rustcomponents"]
+description = "Format the code and sort dependencies"
+run = ["cargo fmt", "cargo sort --grouped"]
 
 [tasks.bench]
 run = [
@@ -21,3 +41,4 @@ run = [
 
 [tasks.ci]
 depends = ["test", "lint"]
+description = "set of tasks run by CI"

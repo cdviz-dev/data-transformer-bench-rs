@@ -35,14 +35,14 @@ mod tests {
             }
         });
 
-        let approach1 = hardcoded_serde::Transformer::new();
+        let approach1 = hardcoded_serde::Transformer;
         let approaches: Vec<Box<dyn Transform>> = vec![
-            Box::new(handlebars::Transformer::new()),
-            Box::new(tera::Transformer::new()),
-            Box::new(vrl::Transformer::new()),
-            Box::new(rhai::Transformer::new()),
-            Box::new(lua::Transformer::new()),
-            Box::new(rune::Transformer::new()),
+            Box::new(handlebars::Transformer::default()),
+            Box::new(tera::Transformer::default()),
+            Box::new(vrl::Transformer::default()),
+            Box::new(rhai::Transformer::default()),
+            Box::new(lua::Transformer::default()),
+            Box::new(rune::Transformer::default()),
         ];
         for transform in TRANSFORMS {
             let expected = approach1.transform(transform, &test_value);

@@ -5,8 +5,8 @@ use super::Transform;
 /// Hardcoded serde transformer used as reference for speed comparison
 pub struct Transformer;
 
-impl Transformer {
-    pub fn new() -> Self {
+impl Default for Transformer {
+    fn default() -> Self {
         Self
     }
 }

@@ -8,8 +8,8 @@ pub struct Transformer {
     scripts: std::collections::HashMap<String, AST>,
 }
 
-impl Transformer {
-    pub fn new() -> Self {
+impl Default for Transformer {
+    fn default() -> Self {
         let mut scripts = std::collections::HashMap::new();
         let mut engine = Engine::new();
         //engine.set_strict_variables(true); //fails because variables from scope are not available at compile time

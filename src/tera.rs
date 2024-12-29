@@ -6,8 +6,8 @@ pub struct Transformer {
     pub(crate) tera: Tera,
 }
 
-impl Transformer {
-    pub fn new() -> Self {
+impl Default for Transformer {
+    fn default() -> Self {
         let mut tera = Tera::default();
         // Register the templates for each transformation
         for transform in super::TRANSFORMS {
