@@ -12,13 +12,13 @@ fn transform_benchmark(c: &mut Criterion) {
     });
 
     let approaches: Vec<Box<dyn Transform>> = vec![
-        Box::new(hardcoded_serde::Transformer::new()),
-        Box::new(handlebars::Transformer::new()),
-        Box::new(tera::Transformer::new()),
-        Box::new(vrl::Transformer::new()),
-        Box::new(rhai::Transformer::new()),
-        Box::new(lua::Transformer::new()),
-        Box::new(rune::Transformer::new()),
+        Box::new(hardcoded_serde::Transformer),
+        Box::new(handlebars::Transformer::default()),
+        Box::new(tera::Transformer::default()),
+        Box::new(vrl::Transformer::default()),
+        Box::new(rhai::Transformer::default()),
+        Box::new(lua::Transformer::default()),
+        Box::new(rune::Transformer::default()),
     ];
     let mut group = c.benchmark_group("transform");
     for transform in data_transformer_bench::TRANSFORMS {

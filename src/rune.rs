@@ -15,17 +15,16 @@ pub struct Transformer {
     runtime: Arc<RuntimeContext>,
 }
 
-impl Transformer {
-    pub fn new() -> Self {
+impl Default for Transformer {
+    fn default() -> Self {
         let context = Context::with_default_modules().expect("Failed to create Rune context");
-        // context.install(rune_modules::json::module(true).expect("Failed to install JSON module"));
         let runtime = Arc::new(context.runtime().expect("Failed to get Rune runtime"));
 
         let mut sources = HashMap::new();
 
         for transform in super::TRANSFORMS {
             let script = format!("transformations/rune/{}.rn", transform);
-            let unit = load_script(&context, &Path::new(&script));
+            let unit = load_script(&context, &script);
             sources.insert(transform.to_string(), Arc::new(unit));
         }
 
@@ -37,18 +36,17 @@ impl Transformer {
     }
 }
 
-fn load_script(context: &Context, path: &Path) -> Unit {
-    let content = fs::read_to_string(&path).expect("Failed to read rune script");
+fn load_script<P: AsRef<Path>>(context: &Context, path: P) -> Unit {
+    let path = path.as_ref();
+    let content = fs::read_to_string(path).expect("Failed to read rune script");
     let mut sources = Sources::new();
     sources
-        .insert(
-            Source::new(&path.to_string_lossy(), content).expect("Failed to create rune source"),
-        )
+        .insert(Source::new(path.to_string_lossy(), content).expect("Failed to create rune source"))
         .expect("Failed to insert rune source");
 
     let mut diagnostics = Diagnostics::new();
     let res_unit = rune::prepare(&mut sources)
-        .with_context(&context)
+        .with_context(context)
         .with_diagnostics(&mut diagnostics)
         .build();
     if !diagnostics.is_empty() {
@@ -57,9 +55,7 @@ fn load_script(context: &Context, path: &Path) -> Unit {
             .emit(&mut writer, &sources)
             .expect("Failed to emit diagnostics");
     }
-    let unit = res_unit.expect("Failed to build Rune program");
-    unit
-    //let mut vm = Vm::new(runtime, Arc::new(unit));
+    res_unit.expect("Failed to build Rune program")
 }
 
 impl Transform for Transformer {

@@ -10,8 +10,8 @@ pub struct Transformer {
     programs: std::collections::HashMap<String, Program>,
 }
 
-impl Transformer {
-    pub fn new() -> Self {
+impl Default for Transformer {
+    fn default() -> Self {
         let mut programs = std::collections::HashMap::new();
         let functions: Vec<Box<dyn Function>> = vec![];
 

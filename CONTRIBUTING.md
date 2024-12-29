@@ -20,6 +20,7 @@ use [mise](https://mise.jdx.dev/) for setup and run tasks
 mise install
 mise tasks
 mise run bench
+mise run ci
 ```
 
 ## Adding a new approach

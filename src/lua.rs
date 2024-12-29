@@ -8,8 +8,8 @@ pub struct Transformer {
     scripts: std::collections::HashMap<String, String>,
 }
 
-impl Transformer {
-    pub fn new() -> Self {
+impl Default for Transformer {
+    fn default() -> Self {
         let mut scripts = std::collections::HashMap::new();
         let lua = Lua::new();
 
