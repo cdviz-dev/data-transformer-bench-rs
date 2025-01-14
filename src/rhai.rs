@@ -16,8 +16,12 @@ impl Default for Transformer {
         engine.set_optimization_level(rhai::OptimizationLevel::Full);
 
         for transform in super::TRANSFORMS {
-            let script = fs::read_to_string(format!("transformations/rhai/{}.rhai", transform))
-                .expect("Failed to read Rhai script");
+            let path = format!("transformations/rhai/{}.rhai", transform);
+            if !std::fs::exists(&path).expect("Failed to access path") {
+                continue;
+            }
+
+            let script = fs::read_to_string(path).expect("Failed to read Rhai script");
             scripts.insert(
                 transform.to_string(),
                 engine

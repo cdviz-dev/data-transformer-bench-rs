@@ -11,9 +11,12 @@ impl Default for Transformer {
         let mut tera = Tera::default();
         // Register the templates for each transformation
         for transform in super::TRANSFORMS {
-            let template =
-                std::fs::read_to_string(format!("transformations/tera/{}.tera", transform))
-                    .expect("Failed to read template file");
+            let path = format!("transformations/tera/{}.tera", transform);
+            if !std::fs::exists(&path).expect("Failed to access path") {
+                continue;
+            }
+
+            let template = std::fs::read_to_string(path).expect("Failed to read template file");
             tera.add_raw_template(transform, &template)
                 .expect("Failed to register template");
         }

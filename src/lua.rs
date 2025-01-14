@@ -14,8 +14,12 @@ impl Default for Transformer {
         let lua = Lua::new();
 
         for transform in super::TRANSFORMS {
-            let script = fs::read_to_string(format!("transformations/lua/{}.lua", transform))
-                .expect("Failed to read Lua script");
+            let path = format!("transformations/lua/{}.lua", transform);
+            if !std::fs::exists(&path).expect("Failed to access path") {
+                continue;
+            }
+
+            let script = fs::read_to_string(path).expect("Failed to read Lua script");
             scripts.insert(transform.to_string(), script);
         }
 

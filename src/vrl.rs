@@ -1,6 +1,5 @@
 use super::{Transform, TRANSFORMS};
 use serde_json::Value;
-use std::fs;
 use vrl::{
     compiler::{compile, state::RuntimeState, Context, Function, Program, TargetValue, TimeZone},
     value::{Secrets, Value as VrlValue},
@@ -16,8 +15,12 @@ impl Default for Transformer {
         let functions: Vec<Box<dyn Function>> = vec![];
 
         for transform in TRANSFORMS {
-            let source = fs::read_to_string(format!("transformations/vrl/{}.vrl", transform))
-                .expect("Failed to read VRL script");
+            let path = format!("transformations/vrl/{}.vrl", transform);
+            if !std::fs::exists(&path).expect("Failed to access path") {
+                continue;
+            }
+
+            let source = std::fs::read_to_string(path).expect("Failed to read VRL script");
 
             let program = compile(&source, &functions)
                 .expect("Failed to compile VRL program")
