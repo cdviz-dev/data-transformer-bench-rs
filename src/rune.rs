@@ -23,8 +23,11 @@ impl Default for Transformer {
         let mut sources = HashMap::new();
 
         for transform in super::TRANSFORMS {
-            let script = format!("transformations/rune/{}.rn", transform);
-            let unit = load_script(&context, &script);
+            let path = format!("transformations/rune/{}.rn", transform);
+            if !std::fs::exists(&path).expect("Failed to access path") {
+                continue;
+            }
+            let unit = load_script(&context, &path);
             sources.insert(transform.to_string(), Arc::new(unit));
         }
 

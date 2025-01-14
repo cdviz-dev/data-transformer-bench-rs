@@ -12,7 +12,7 @@ run = [
 ]
 
 [tasks.test]
-run = "cargo test"
+run = "RUST_BACKTRACE=1 cargo test"
 
 [tasks."lint"]
 depends = ["lint:rust"]
