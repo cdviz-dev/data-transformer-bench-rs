@@ -50,9 +50,17 @@ mod tests {
                 if !approach.accept(transform) {
                     continue;
                 }
+                let custom_value_path = format!("assets/values/{}.json", transform);
+                let value = if std::fs::exists(&custom_value_path).expect("Failed to access path") {
+                    let txt =
+                        std::fs::read_to_string(custom_value_path).expect("Failed to read file");
+                    serde_json::from_str(&txt).expect("Failed to deserialize value")
+                } else {
+                    test_value.clone()
+                };
                 assert_eq!(
                     expected,
-                    approach.transform(transform, &test_value),
+                    approach.transform(transform, &value),
                     "{}/{}",
                     approach.name(),
                     transform,
