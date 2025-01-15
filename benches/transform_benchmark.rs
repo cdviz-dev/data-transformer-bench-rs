@@ -22,7 +22,9 @@ fn transform_benchmark(c: &mut Criterion) {
         Box::new(lua::Transformer::default()),
         Box::new(rune::Transformer::default()),
     ];
-    for transform in data_transformer_bench::TRANSFORMS {
+    let transformations = data_transformer_bench::TRANSFORMS;
+    // let transformations = vec![data_transformer_bench::GH_01];
+    for transform in transformations {
         let mut group = c.benchmark_group(transform);
         for approach in approaches.iter() {
             if !approach.accept(transform) {

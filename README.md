@@ -11,22 +11,27 @@ A place to explore & benchmark various template/script to transform data (json) 
 
 The data transformation are driven by the [cdviz-collector]'s use cases:
 
-- inputs are json object (read from )
+- inputs are json object (read from extractors)
 - outputs are an array of json objects:
-  - `[]` empty array, will interpreted as drop of the event
+  - `[]` empty array, will be interpreted as drop of the event
   - `null` will be interpreted as a skip the transformation
   - an array of size 1 is a 1 to 1 transformation
 - the template/script are provided at runtime (by users to customize transformations)
 - integration with [cdviz-collector] is required
+- evaluate / feeling (the results are not shared in this repo) about:
+  - error reporting on invalid templates/scripts
+  - integration with editors (linting, error, coloring, autocompletion, ...)
+  - language documentation
+  - ease of use, learning curve for new users
 
 Scenarii to bench (for comparison or feature/how-to):
 
 - [x] identity transformation (no change, just wrap the value in an array)
 - [x] `null` return (skip)
 - [x] `[]` return (drop)
-- [ ] conditional transformation (if, switch, ...)
-- [ ] restructure & transform the data (TBD)
-  - timestamp insertion + parsing + formatting
+- [x] conditional transformation (if, switch, ...) (`gh_01`)
+- [x] restructure & transform the data (`gh_01`)
+  - timestamp insertion + parsing + formatting (not built-in by default in every)
 
 Look at the `transformations` folder for the various templates/scripts to transform the data.
 
@@ -44,7 +49,7 @@ Look at the `transformations` folder for the various templates/scripts to transf
 
 ### Rejected candidates
 
-- template: [sailfish](https://rust-sailfish.github.io/sailfish/), template are statically build at compile time
+- template: [sailfish](https://rust-sailfish.github.io/sailfish/), template are statically built at compile time
 
 ## Benchmarks & Results
 
@@ -52,6 +57,8 @@ Look at the `transformations` folder for the various templates/scripts to transf
 cargo bench
 #OR
 cargo criterion --output-format quiet
+#OR
+mise run bench
 ```
 
 ![drop](docs/images/violin_drop.svg)
@@ -60,30 +67,38 @@ cargo criterion --output-format quiet
 
 ![identity](docs/images/violin_identity.svg)
 
+![gh_01](docs/images/violin_gh_01.svg)
+
 ```text
-drop/hardcoded_serde    time:   [56.569 ns 56.588 ns 56.612 ns]
-drop/handlebars         time:   [604.39 ns 605.90 ns 607.33 ns]
-drop/tera               time:   [657.39 ns 659.08 ns 661.70 ns]
-drop/vrl                time:   [616.75 ns 618.39 ns 619.68 ns]
-drop/rhai               time:   [801.65 ns 802.92 ns 804.24 ns]
-drop/lua                time:   [4.9586 µs 4.9696 µs 4.9797 µs]
-drop/rune               time:   [1.0599 µs 1.0615 µs 1.0632 µs]
+drop/hardcoded_serde    time:   [57.874 ns 58.138 ns 58.446 ns]
+drop/handlebars         time:   [604.44 ns 607.96 ns 612.37 ns]
+drop/tera               time:   [660.49 ns 664.88 ns 670.94 ns]
+drop/vrl                time:   [615.98 ns 618.91 ns 623.79 ns]
+drop/rhai               time:   [821.30 ns 827.65 ns 834.31 ns]
+drop/lua                time:   [5.0192 µs 5.0619 µs 5.1183 µs]
+drop/rune               time:   [1.0196 µs 1.0265 µs 1.0360 µs]
 
-skip/hardcoded_serde    time:   [42.127 ns 42.166 ns 42.218 ns]
-skip/handlebars         time:   [592.99 ns 594.01 ns 595.20 ns]
-skip/tera               time:   [842.46 ns 845.00 ns 848.77 ns]
-skip/vrl                time:   [566.10 ns 566.55 ns 567.04 ns]
-skip/rhai               time:   [768.12 ns 770.54 ns 773.88 ns]
-skip/lua                time:   [5.1970 µs 5.2107 µs 5.2276 µs]
-skip/rune               time:   [1.0025 µs 1.0034 µs 1.0042 µs]
+skip/hardcoded_serde    time:   [41.233 ns 41.419 ns 41.657 ns]
+skip/handlebars         time:   [592.01 ns 596.69 ns 602.91 ns]
+skip/tera               time:   [624.78 ns 628.02 ns 633.33 ns]
+skip/vrl                time:   [575.05 ns 576.12 ns 577.63 ns]
+skip/rhai               time:   [788.40 ns 794.83 ns 802.70 ns]
+skip/lua                time:   [5.2030 µs 5.2342 µs 5.2871 µs]
+skip/rune               time:   [951.08 ns 954.47 ns 958.78 ns]
 
-identity/hardcoded_...  time:   [799.32 ns 801.82 ns 804.70 ns]
-identity/handlebars     time:   [2.2369 µs 2.2393 µs 2.2421 µs]
-identity/tera           time:   [1.8578 µs 1.8601 µs 1.8625 µs]
-identity/vrl            time:   [1.3419 µs 1.3454 µs 1.3502 µs]
-identity/rhai           time:   [1.5856 µs 1.5869 µs 1.5882 µs]
-identity/lua            time:   [9.2040 µs 9.2127 µs 9.2218 µs]
-identity/rune           time:   [1.4768 µs 1.4785 µs 1.4803 µs]
+identity/hardcoded_...  time:   [806.03 ns 809.88 ns 814.34 ns]
+identity/handlebars     time:   [2.1570 µs 2.1658 µs 2.1785 µs]
+identity/tera           time:   [1.7957 µs 1.8057 µs 1.8221 µs]
+identity/vrl            time:   [1.3664 µs 1.3767 µs 1.3897 µs]
+identity/rhai           time:   [1.5959 µs 1.6008 µs 1.6079 µs]
+identity/lua            time:   [9.0768 µs 9.1616 µs 9.2636 µs]
+identity/rune           time:   [1.4685 µs 1.4749 µs 1.4829 µs]
+
+gh_01/hardcoded_serde   time:   [2.5733 µs 2.5759 µs 2.5789 µs]
+gh_01/tera              time:   [19.728 µs 19.753 µs 19.782 µs]
+gh_01/vrl               time:   [18.989 µs 19.069 µs 19.160 µs]
+gh_01/rhai              time:   [31.200 µs 31.241 µs 31.284 µs]
+gh_01/rune              time:   [29.253 µs 29.335 µs 29.442 µs]
 ```
 
 ## Contributing
