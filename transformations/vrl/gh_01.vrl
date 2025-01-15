@@ -1,0 +1,26 @@
+if .action == "published" {
+    repo = .repository.name || "no-repo"
+    namespace = .repository.owner.login || "no-namespace"
+    version = .release.tag_name || "no-version"
+    ts = .release.published_at || "no-ts"
+    # ts = parse_timestamp(.release.published_at, "%+") ?? now()
+    # ts = format_timestamp!(ts, format: "%+")
+    [{
+        "context": {
+            "version": "0.5.0-draft",
+            "id": "0", # uuid_v7(ts)
+            "source": "/api.github.com/repos/{{ namespace }}/{{ repo }}/releases" ?? "",
+            "type": "dev.cdevents.artifact.published.0.3.0-draft",
+            "timestamp": ts,
+        },
+        "subject": {
+            "id": "pkg:github/{{ namespace }}/{{ repo }}@{{ version }}" ?? "",
+            "type": "artifact",
+            "content": {
+                "user": .release.author.login,
+            }
+        }
+    }]
+} else {
+    []
+}

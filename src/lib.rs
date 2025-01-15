@@ -11,7 +11,8 @@ use serde_json::Value;
 pub const DROP: &str = "drop";
 pub const IDENTITY: &str = "identity";
 pub const SKIP: &str = "skip";
-pub const TRANSFORMS: [&str; 3] = [DROP, SKIP, IDENTITY];
+pub const GH_01: &str = "gh_01";
+pub const TRANSFORMS: [&str; 4] = [DROP, SKIP, IDENTITY, GH_01];
 
 pub trait Transform {
     fn name(&self) -> &str;

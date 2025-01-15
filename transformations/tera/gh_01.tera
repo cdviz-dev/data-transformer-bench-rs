@@ -1,0 +1,24 @@
+{%if value.action == "published" %}
+    {% set repo = value.repository.name %}
+    {% set namespace = value.repository.owner.login %}
+    {% set version = value.release.tag_name %}
+    {% set ts = value.release.published_at %}
+    [{
+        "context": {
+            "version": "0.5.0-draft",
+            "id": "0",
+            "source": "/api.github.com/repos/{{ namespace }}/{{ repo }}/releases",
+            "type": "dev.cdevents.artifact.published.0.3.0-draft",
+            "timestamp": "{{ ts }}"
+        },
+        "subject": {
+            "id": "pkg:github/{{ namespace }}/{{ repo }}@{{ version }}",
+            "type": "artifact",
+            "content": {
+                "user": "{{ value.release.author.login }}"
+            }
+        }
+    }]
+{% else %}
+    []
+{% endif %}

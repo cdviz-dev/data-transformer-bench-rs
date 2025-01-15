@@ -1,7 +1,7 @@
 use super::{Transform, TRANSFORMS};
 use serde_json::Value;
 use vrl::{
-    compiler::{compile, state::RuntimeState, Context, Function, Program, TargetValue, TimeZone},
+    compiler::{compile, state::RuntimeState, Context, Program, TargetValue, TimeZone},
     value::{Secrets, Value as VrlValue},
 };
 
@@ -12,7 +12,7 @@ pub struct Transformer {
 impl Default for Transformer {
     fn default() -> Self {
         let mut programs = std::collections::HashMap::new();
-        let functions: Vec<Box<dyn Function>> = vec![];
+        let functions = vrl::stdlib::all(); //vec![];
 
         for transform in TRANSFORMS {
             let path = format!("transformations/vrl/{}.vrl", transform);

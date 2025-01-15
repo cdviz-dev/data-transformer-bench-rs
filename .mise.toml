@@ -40,6 +40,7 @@ run = [
   "cp target/criterion/reports/drop/violin.svg docs/images/violin_drop.svg",
   "cp target/criterion/reports/identity/violin.svg docs/images/violin_identity.svg",
   "cp target/criterion/reports/skip/violin.svg docs/images/violin_skip.svg",
+  "cp target/criterion/reports/gh_01/violin.svg docs/images/violin_gh_01.svg",
 ]
 
 [tasks.ci]

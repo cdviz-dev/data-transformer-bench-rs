@@ -1,0 +1,28 @@
+pub fn main(value) {
+    if value.action == "published" {
+        let repo = value.repository.name;
+        let namespace = value.repository.owner.login;
+        let version = value.release.tag_name;
+        let ts = value.release.published_at;
+        // ts = parse_timestamp(value.release.published_at, "%+") ?? now();
+        // ts = format_timestamp!(ts, format: "%+");
+        [#{
+            "context": #{
+                "version": "0.5.0-draft",
+                "id": "0", // uuid_v7(ts)
+                "source": `/api.github.com/repos/${ namespace }/${ repo }/releases`,
+                "type": "dev.cdevents.artifact.published.0.3.0-draft",
+                "timestamp": ts,
+            },
+            "subject": #{
+                "id": `pkg:github/${ namespace }/${ repo }@${ version }`,
+                "type": "artifact",
+                "content": #{
+                    "user": value.release.author.login,
+                }
+            }
+        }]
+    } else {
+        []
+    }
+}
