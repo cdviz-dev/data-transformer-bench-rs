@@ -1,5 +1,5 @@
 [tools]
-rust = "1.86.0"
+rust = "1.87.0"
 # gnuplot = "latest"
 "aqua:cargo-bins/cargo-binstall" = "1" # do not use cargo-binstall (it's a special name used by mise)
 "cargo:cargo-sort" = "latest"
