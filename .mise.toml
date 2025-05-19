@@ -30,7 +30,7 @@ run = [
 alias = ["fmt"]
 depends = ["install:rustcomponents"]
 description = "Format the code and sort dependencies"
-run = ["cargo fmt", "cargo sort --grouped"]
+run = ["cargo fmt --all", "cargo sort --grouped"]
 
 [tasks.bench]
 run = [
