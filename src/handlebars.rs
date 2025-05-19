@@ -2,7 +2,7 @@ use handlebars::Handlebars;
 use serde_json::Value;
 use std::fs;
 
-use super::{Transform, TRANSFORMS};
+use super::{TRANSFORMS, Transform};
 
 pub struct Transformer {
     pub(crate) handlebars: Handlebars<'static>,

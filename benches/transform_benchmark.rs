@@ -1,7 +1,7 @@
 use std::fs;
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
-use data_transformer_bench::{handlebars, hardcoded_serde, lua, rhai, rune, tera, vrl, Transform};
+use criterion::{Criterion, black_box, criterion_group, criterion_main};
+use data_transformer_bench::{Transform, handlebars, hardcoded_serde, lua, rhai, rune, tera, vrl};
 use serde_json::json;
 
 fn transform_benchmark(c: &mut Criterion) {

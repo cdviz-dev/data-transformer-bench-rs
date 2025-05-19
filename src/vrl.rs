@@ -1,7 +1,7 @@
-use super::{Transform, TRANSFORMS};
+use super::{TRANSFORMS, Transform};
 use serde_json::Value;
 use vrl::{
-    compiler::{compile, state::RuntimeState, Context, Program, TargetValue, TimeZone},
+    compiler::{Context, Program, TargetValue, TimeZone, compile, state::RuntimeState},
     value::{Secrets, Value as VrlValue},
 };
 
