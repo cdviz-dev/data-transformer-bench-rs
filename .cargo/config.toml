@@ -1,0 +1,2 @@
+[env]
+CFLAGS='-std=gnu17' # to compile oniguruma (deps of vrl/grok/oni-rs) with gcc >= 15
