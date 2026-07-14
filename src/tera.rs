@@ -1,6 +1,7 @@
 use crate::Transform;
 use serde_json::Value;
 use tera::Tera;
+use tera_contrib::json::json_encode;
 
 pub struct Transformer {
     pub(crate) tera: Tera,
@@ -9,6 +10,7 @@ pub struct Transformer {
 impl Default for Transformer {
     fn default() -> Self {
         let mut tera = Tera::default();
+        tera.register_filter("json_encode", json_encode);
         // Register the templates for each transformation
         for transform in super::TRANSFORMS {
             let path = format!("transformations/tera/{}.tera", transform);
@@ -41,6 +43,9 @@ impl Transform for Transformer {
     }
 
     fn accept(&self, transformation: &str) -> bool {
-        self.tera.get_template(transformation).is_ok()
+        self.tera
+            .get_template_names()
+            .find(|v| *v == transformation)
+            .is_some()
     }
 }
