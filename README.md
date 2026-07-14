@@ -61,13 +61,23 @@ cargo criterion --output-format quiet
 mise run bench
 ```
 
-![drop](docs/images/violin_drop.svg)
+### 2025-05-19
 
-![skip](docs/images/violin_skip.svg)
+| rust       | 1.87 |
+| handlebars | 6.3  |
+| mlua       | 0.10 |
+| rhai       | 1.21 |
+| rune       | 0.14 |
+| tera       | 1.20 |
+| vrl        | 0.23 |
 
-![identity](docs/images/violin_identity.svg)
+![drop](docs/images-20250519/violin_drop.svg)
 
-![gh_01](docs/images/violin_gh_01.svg)
+![skip](docs/images-20250519/violin_skip.svg)
+
+![identity](docs/images-20250519/violin_identity.svg)
+
+![gh_01](docs/images-20250519/violin_gh_01.svg)
 
 ```text
 drop/hardcoded_serde    time:   [48.527 ns 48.866 ns 49.235 ns]
