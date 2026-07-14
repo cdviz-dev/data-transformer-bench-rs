@@ -61,8 +61,65 @@ cargo criterion --output-format quiet
 mise run bench
 ```
 
-### 2025-05-19
+<details open><summary>2026-07-14</summary>
 
+| Name       | Version |
+|------------|---------|
+| rust       | 1.97 |
+| handlebars | 6.4  |
+| mlua       | 0.10 |
+| rhai       | 1.21 |
+| rune       | 0.14 |
+| tera       | 2.0  |
+| vrl        | 0.23 |
+
+![drop](./docs/images-20260714/violin_drop.svg)
+
+![skip](./docs/images-20260714/violin_skip.svg)
+
+![identity](./docs/images-20260714/violin_identity.svg)
+
+![gh_01](./docs/images-20260714/violin_gh_01.svg)
+
+```text
+drop/hardcoded_serde    time:   [49.267 ns 49.461 ns 49.677 ns]
+drop/handlebars         time:   [666.51 ns 670.00 ns 674.08 ns]
+drop/tera               time:   [807.50 ns 813.62 ns 820.00 ns]
+drop/vrl                time:   [715.52 ns 717.29 ns 719.28 ns]
+drop/rhai               time:   [796.10 ns 798.22 ns 800.73 ns]
+drop/lua                time:   [5.7281 µs 5.7631 µs 5.8001 µs]
+drop/rune               time:   [942.62 ns 949.49 ns 957.35 ns]
+
+skip/hardcoded_serde    time:   [31.286 ns 31.336 ns 31.380 ns]
+skip/handlebars         time:   [644.18 ns 646.95 ns 650.26 ns]
+skip/tera               time:   [759.97 ns 764.29 ns 768.10 ns]
+skip/vrl                time:   [651.43 ns 656.46 ns 660.93 ns]
+skip/rhai               time:   [775.33 ns 782.64 ns 790.86 ns]
+skip/lua                time:   [6.1648 µs 6.2363 µs 6.3283 µs]
+skip/rune               time:   [982.31 ns 999.34 ns 1.0165 µs]
+
+identity/hardcoded_serde                                       
+                        time:   [1.0276 µs 1.0449 µs 1.0645 µs]
+identity/handlebars     time:   [2.6336 µs 2.6448 µs 2.6595 µs]
+identity/tera           time:   [1.8831 µs 1.9017 µs 1.9218 µs]
+identity/vrl            time:   [1.4439 µs 1.4473 µs 1.4508 µs]
+identity/rhai           time:   [1.6619 µs 1.6848 µs 1.7066 µs]
+identity/lua            time:   [11.066 µs 11.132 µs 11.204 µs]
+identity/rune           time:   [1.6152 µs 1.6237 µs 1.6342 µs]
+
+gh_01/hardcoded_serde   time:   [3.2340 µs 3.2645 µs 3.2952 µs]
+gh_01/tera              time:   [20.972 µs 21.096 µs 21.239 µs]
+gh_01/vrl               time:   [29.697 µs 29.758 µs 29.832 µs]
+gh_01/rhai              time:   [34.860 µs 35.201 µs 35.556 µs]
+gh_01/rune              time:   [36.955 µs 37.930 µs 39.065 µs]
+```
+
+</details>
+
+<details><summary>2025-05-19</summary>
+
+| Name       | Version |
+|------------|---------|
 | rust       | 1.87 |
 | handlebars | 6.3  |
 | mlua       | 0.10 |
@@ -71,13 +128,13 @@ mise run bench
 | tera       | 1.20 |
 | vrl        | 0.23 |
 
-![drop](docs/images-20250519/violin_drop.svg)
+![drop](./docs/images-20250519/violin_drop.svg)
 
-![skip](docs/images-20250519/violin_skip.svg)
+![skip](./docs/images-20250519/violin_skip.svg)
 
-![identity](docs/images-20250519/violin_identity.svg)
+![identity](./docs/images-20250519/violin_identity.svg)
 
-![gh_01](docs/images-20250519/violin_gh_01.svg)
+![gh_01](./docs/images-20250519/violin_gh_01.svg)
 
 ```text
 drop/hardcoded_serde    time:   [48.527 ns 48.866 ns 49.235 ns]
@@ -111,6 +168,8 @@ gh_01/vrl               time:   [18.768 µs 18.831 µs 18.903 µs]
 gh_01/rhai              time:   [31.537 µs 31.761 µs 32.014 µs]
 gh_01/rune              time:   [27.582 µs 27.763 µs 27.939 µs]
 ```
+
+</details>
 
 ## Contributing
 
