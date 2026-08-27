@@ -11,7 +11,7 @@ rhai = { version = "1.21", features = ["serde"] }
 rune = { version = "0.14", features = ["serde_json"] }
 serde_json = "1"
 tera = "2"
-tera-contrib = { version = "0.2", features = ["json"] }
+tera-contrib = { version = "0.3", features = ["json"] }
 vrl = "0.35"
 
 [dev-dependencies]
